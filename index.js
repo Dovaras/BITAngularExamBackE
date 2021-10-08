@@ -7,8 +7,7 @@ const sql = require('./db.js')
 app.get('/test-conn', (req, res) => {
     sql.query('SELECT 1 + 1 AS solution', function (err, rows, fields) {
     if (err) throw err;
-
-      res.status(200).send({ rows }); //solution: rows[0].solution
+      res.status(200).send({ solution: rows[0].solution });
   })
 })
 
@@ -17,7 +16,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/cow', (req, res) => {
-  sql.query('SELECT * FROM Cow', function (err, rows, fields) {
+  sql.query('SELECT * FROM Cow', (err, rows, fields) => {
   if (err) throw err;
     res.status(200).send(rows);
   })
